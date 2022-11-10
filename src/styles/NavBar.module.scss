@@ -1,0 +1,37 @@
+@import "mixins";
+.navbar{
+  background-color: #363C3C;
+  padding: 19px;
+  a{
+    color: white;
+  }
+  .formSearch{
+    width: 320px;
+    height: 60px;
+    input{
+      font-size: 24px;
+      color: #363C3C;
+      padding: 17px 21px;
+    }
+  }
+}
+.navbarLink{
+  text-decoration: none;
+  margin-left: 35px;
+  font-size: 24px;
+}
+.navbarToggle{
+  transform: rotate(90deg);
+  font-weight: bold;
+  font-size: 30px;
+  letter-spacing: 3px;
+  color: #FDFDFD;
+  &:focus{
+    box-shadow: none;
+  }
+}
+.showMobile{
+  @include min-w(992){
+    display: none;
+  }
+}

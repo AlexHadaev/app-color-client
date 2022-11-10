@@ -1,0 +1,57 @@
+@import "mixins";
+.typeBar{
+  max-width: 320px;
+  width: 100%;
+  background-color: #D6D8D8;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  @include max-w(991){
+    max-width: 100%;
+    background-color: transparent;
+    box-shadow: none;
+  }
+}
+.btnLight{
+  background: #FFFFFF;
+  border: 1px solid #363C3C;
+  border-radius: 10px;
+  height: 60px;
+  max-width: 260px;
+  width: calc(100% - 60px);
+  font-size: 24px;
+  font-weight: 700;
+  align-self: center;
+  margin: 80px 40px 0;
+  @include max-w(1024){
+    margin-left: auto;
+    margin-right: auto;
+    width: calc(100% - 40px);
+  }
+  @include max-w(991){
+    margin-left: 0;
+    margin-top: 30px;
+    border: 2px solid #FDFDFD;
+  }
+}
+.listGroupItem{
+  background-color: #D6D8D8;
+  cursor: pointer;
+  border: none;
+  color: #363C3C;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 35px;
+  text-transform: capitalize;
+  padding: 0 30px;
+  @include max-w(1024){
+    padding: 0 20px;
+  }
+  @include max-w(991){
+    background-color: transparent;
+    color: #FDFDFD;
+    line-height: 45px;
+  }
+}
+

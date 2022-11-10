@@ -1,0 +1,19 @@
+@import 'mixins';
+.colorList{
+  padding-top: 80px;
+  justify-content: space-between;
+  gap: 40px 10px;
+  grid-template-columns: repeat(4, auto);
+  @include max-w(1330){
+    grid-template-columns: repeat(3, auto);
+  }
+  @include max-w(740){
+    grid-template-columns: repeat(2, auto);
+    column-gap: 40px;
+    justify-content: center;
+  }
+  @include max-w(540){
+    grid-template-columns: repeat(1, auto);
+    column-gap: 40px;
+  }
+}

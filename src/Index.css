@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Serif+Pro:regular,bold,italic&subset=latin,latin-ext');
+
+body, html, * {
+    font-family: 'Source Serif Pro', sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+.pagination .page-item.active{
+    border-bottom: 2px solid #363C3C;
+}

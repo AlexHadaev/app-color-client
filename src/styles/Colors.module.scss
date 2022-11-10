@@ -1,0 +1,17 @@
+@import "mixins";
+.colors{
+  padding-left: 40px;
+  padding-right: 40px;
+  @include max-w(1024){
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+.container{
+  max-width: 1440px;
+}
+.showDesktop{
+  @include max-w(991){
+    display: none;
+  }
+}
