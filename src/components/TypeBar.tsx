@@ -14,13 +14,10 @@ interface TypeBarProps{
 
 const TypeBar:FC<TypeBarProps> = observer(
     (styleMedia, toggle) => {
-        // console.log(styleMedia.styleMedia);
         const {color} = useContext(Context)
         const history = useNavigate()
         const [activeTab, setActiveTab] = useState<boolean>(true)
-        // console.log(color.types);
         useEffect(()=>{
-            // console.log(activeTab);
             if (color.selectedType.id) setActiveTab(false)
         },[])
 
@@ -32,7 +29,6 @@ const TypeBar:FC<TypeBarProps> = observer(
                     color.setOnToggle(false)
                 }
             })
-            // console.log(color.page);
         }
 
         const changeType = (type:ITypes) => {
@@ -43,11 +39,9 @@ const TypeBar:FC<TypeBarProps> = observer(
             if (toggle){
                 color.setOnToggle(false)
             }
-            // console.log(activeTab);
         }
 
         const changeAllColors = () => {
-            // console.log(color.selectedType);
             setActiveTab(true)
             color.setSelectedType(0)
             history('/color')

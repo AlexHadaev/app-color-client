@@ -8,7 +8,6 @@ import styles from "../styles/ColorList.module.scss";
 const ColorList = observer(
     () => {
         const {color} = useContext(Context)
-        // console.log(color)
         return (
             <div className={`d-grid flex-wrap  ${styles.colorList}`}>
                 {color.colors.map((color:IColors) =>

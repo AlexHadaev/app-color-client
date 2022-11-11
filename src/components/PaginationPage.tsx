@@ -7,8 +7,6 @@ import {observer} from "mobx-react-lite";
 const PaginationPage = observer(
     () => {
         const {color} = useContext(Context)
-        const [currentNumberPage, setCurrentNumberPage] = useState(1)
-        // console.log(color.totalCount, color.limit);
         const pageCount = Math.ceil(color.totalCount / color.limit)
         const middleNumberPage = Math.ceil(pageCount/2) | 10;
         const [centerNumberPage, setCenterNumberPage] = useState<number>(middleNumberPage)
@@ -16,32 +14,11 @@ const PaginationPage = observer(
         const [isEllipsisRight, setIsEllipsisRight] = useState<boolean>(true)
         const pages = []
 
-        // const prevPage = () => {
-        //     // console.log(currentNumberPage, pageCount);
-        //     if (currentNumberPage > 1) {
-        //         setCurrentNumberPage(color.page - 1)
-        //         color.setPage(color.page - 1)
-        //     }
-        // }
-        // const nextPage = () => {
-        //     // console.log(currentNumberPage, pageCount);
-        //     if (currentNumberPage < pageCount) {
-        //         setCurrentNumberPage(color.page + 1)
-        //         color.setPage(color.page + 1)
-        //
-        //         currentMultiPage(currentNumberPage+1)
-        //         console.log(currentNumberPage + 1);
-        //         console.log(centerNumberPage,color.page, pageCount - 3);
-        //     }
-        // }
-
         const currentPage = (page: number) => {
-            setCurrentNumberPage(page)
             color.setPage(page)
         }
 
         const currentMultiPage = (page: number) => {
-            setCurrentNumberPage(page)
             color.setPage(page)
             //multi
             if (page === 3 || page === 5){
@@ -66,8 +43,6 @@ const PaginationPage = observer(
                 setIsEllipsisRight(false)
                 setIsEllipsisLeft(true)
             }
-
-            // console.log(centerNumberPage, page, pageCount - 3);
         }
 
         for (let i = 0; i < pageCount; i++) {
@@ -88,7 +63,6 @@ const PaginationPage = observer(
                     )
                     :
                     <>
-                        {/*<Pagination.Prev onClick={() => prevPage()}/>*/}
                         <Pagination.Item
                             className={styles.pageItem}
                             active={color.page === 1}
@@ -161,7 +135,6 @@ const PaginationPage = observer(
                         >
                             {pageCount}
                         </Pagination.Item>
-                        {/*<Pagination.Next onClick={() => nextPage()}/>*/}
                     </>
                 }
             </>

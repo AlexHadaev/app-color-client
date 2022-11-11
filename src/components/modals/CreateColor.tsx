@@ -1,7 +1,6 @@
 import React, {FC, useContext, useEffect, useState} from 'react';
 import {Button, Dropdown, Form, Modal} from "react-bootstrap";
 import {Context} from "../../index";
-// import {createDevice, fetchBrands, fetchDevices, fetchTypes} from "../../http/deviceAPI";
 import {observer} from "mobx-react-lite";
 import {ITypes} from "../../types/types";
 import {hexToRGB, rgbaToHex, shadows} from "../../utils/utils"
@@ -39,7 +38,6 @@ const CreateColor: FC<CreateColorProps> = observer(
 
             if (shadow && color.selectedType.id) {
                 const colorCodeHEX = rgbaToHex(colorCode + "," + shadow)
-                // console.log(colorCodeHEX);
                 formData = {
                     'color': colorCode + "," + shadow,
                     'shadow': colorCode,
