@@ -22,7 +22,7 @@ const TypeBar:FC<TypeBarProps> = observer(
         },[])
 
         const randomColors = () => {
-            fetchColors(color.selectedType.id, 8, 1, 8).then(data => {
+            fetchColors(color.selectedType.id, 12, 1, 8).then(data => {
                 color.setColors(data.rows)
                 history('/color')
                 if (toggle){
