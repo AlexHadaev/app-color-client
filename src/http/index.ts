@@ -1,7 +1,9 @@
 import axios from "axios";
 
-console.log(process.env.REACT_APP_API_URL);
+const baseURL = process.env.NODE_ENV === 'production'?process.env.REACT_APP_API_URL_PRODUCTION : process.env.REACT_APP_API_URL
+console.log(baseURL, process.env.NODE_ENV, process.env.REACT_APP_API_URL_PRODUCTION , process.env.REACT_APP_API_URL);
+
 export const $host = axios.create({
-    baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/'
+    baseURL: baseURL || 'http://localhost:5000/'
 })
 
