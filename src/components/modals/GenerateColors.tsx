@@ -10,7 +10,7 @@ const GenerateColor:FC<GenerateColorProps> = ({show, onHide}) => {
     const [value, setValue] = useState('')
     const [check, setCheck] = useState(true)
     const generateColors = () => {
-        const countColor = value || '2'
+        const countColor = value || '20'
         createColorGenerate(countColor, check).then(data => setValue(''))
         onHide()
     }
