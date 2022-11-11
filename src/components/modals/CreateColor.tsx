@@ -15,9 +15,18 @@ interface CreateColorProps {
 const CreateColor: FC<CreateColorProps> = observer(
     ({show, onHide}) => {
         const {color} = useContext(Context)
-        const [shadow, setShadow] = useState<number | string>('Change shadow')
+        const [shadow, setShadow] = useState<number>()
         const [name, setName] = useState('')
-        console.log(name);
+        const [noValidType, setNoValidType] = useState<boolean>(false)
+        const [noValidShadow, setNoValidShadow] = useState<boolean>(false)
+
+        useEffect(() => {
+            if (show) {
+                setNoValidType(false)
+                setNoValidShadow(false)
+            }
+        }, [show])
+
         useEffect(() => {
             fetchTypes().then(data => color.setTypes(data))
             fetchColors().then(data => color.setColors(data.rows))
@@ -27,15 +36,21 @@ const CreateColor: FC<CreateColorProps> = observer(
         const addDevice = () => {
             let formData = {}
             const colorCode = hexToRGB(name)
-            const colorCodeHEX = rgbaToHex(colorCode + "," + shadow)
-            // console.log(colorCodeHEX);
-            formData = {
-                'color': colorCode + "," + shadow,
-                'shadow': colorCode,
-                'typeId': color.selectedType.id,
-                'colorHEXA': colorCodeHEX
+
+            if (shadow && color.selectedType.id) {
+                const colorCodeHEX = rgbaToHex(colorCode + "," + shadow)
+                // console.log(colorCodeHEX);
+                formData = {
+                    'color': colorCode + "," + shadow,
+                    'shadow': colorCode,
+                    'typeId': color.selectedType.id,
+                    'colorHEXA': colorCodeHEX
+                }
+
+                createColor(formData).then(data => onHide())
             }
-            createColor(formData).then(data => onHide())
+            shadow? setNoValidShadow(false) : setNoValidShadow(true)
+            color.selectedType.id? setNoValidType(false): setNoValidType(true)
         }
 
         return (
@@ -53,7 +68,9 @@ const CreateColor: FC<CreateColorProps> = observer(
                 <Modal.Body>
                     <Form>
                         <Dropdown className={"mt-2 mb-2"}>
-                            <Dropdown.Toggle>{color.selectedType.name || 'Change type'}</Dropdown.Toggle>
+                            <Dropdown.Toggle className={noValidType ? "btn-danger" : ''}>
+                                {color.selectedType.name || 'Change type'}
+                            </Dropdown.Toggle>
                             <Dropdown.Menu>
                                 {color.types.map((type: ITypes) =>
                                     <Dropdown.Item
@@ -66,10 +83,12 @@ const CreateColor: FC<CreateColorProps> = observer(
                             </Dropdown.Menu>
                         </Dropdown>
                         <Dropdown className={"mt-2 mb-2"}>
-                            <Dropdown.Toggle>{shadow}</Dropdown.Toggle>
+                            <Dropdown.Toggle className={noValidShadow ? "btn-danger" : ''}>
+                                {shadow || 'Change shadow'}
+                            </Dropdown.Toggle>
                             <Dropdown.Menu>
 
-                                {shadows().map((item: number | string) =>
+                                {shadows().map((item: number) =>
                                     <Dropdown.Item
                                         onClick={() => setShadow(item)}
                                         key={item}

@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
 import {createType} from "../../http/colorAPI";
 
@@ -9,13 +9,22 @@ interface CreateTypeProps{
 
 const CreateType: FC<CreateTypeProps> = ({show, onHide}) => {
     const [value, setValue] = useState('')
+    const [noValid, setNoValid] = useState<boolean>(false)
+
+    useEffect(()=> {
+        show && setNoValid(false)
+    }, [show])
+
     const addType = () => {
-        createType({name: value}).then(data => {
-            console.log(data);
-            // color.setSelectedType(type)
-            setValue('')
-        })
-        onHide()
+        if (value !== ''){
+            setNoValid(false)
+            createType({name: value}).then(() => {
+                setValue('')
+            })
+            onHide()
+        }else{
+            setNoValid(true)
+        }
     }
     return (
         <Modal
@@ -32,6 +41,7 @@ const CreateType: FC<CreateTypeProps> = ({show, onHide}) => {
             <Modal.Body>
                 <Form>
                     <Form.Control
+                        className={noValid? "is-invalid":''}
                         value={value}
                         onChange={e => setValue(e.target.value)}
                         placeholder={"Enter type name"}
