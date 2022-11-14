@@ -23,6 +23,7 @@ const TypeBar:FC<TypeBarProps> = observer(
 
         const randomColors = () => {
             color.setQuery('')
+            color.setPage(2)
             fetchColors(color.selectedType.id, 12, 1, 8).then(data => {
                 color.setColors(data.rows)
                 history('/color')
