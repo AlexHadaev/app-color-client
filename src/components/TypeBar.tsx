@@ -23,8 +23,9 @@ const TypeBar:FC<TypeBarProps> = observer(
 
         const randomColors = () => {
             color.setQuery('')
-            color.setPage(2)
-            fetchColors(color.selectedType.id, 12, 1, 8).then(data => {
+            color.setTotalCount(0)
+
+            fetchColors(color.selectedType.id, 12, 1, 12).then(data => {
                 color.setColors(data.rows)
                 history('/color')
                 if (toggle){
@@ -38,7 +39,7 @@ const TypeBar:FC<TypeBarProps> = observer(
             color.setSelectedType(type)
             setActiveTab(false)
             history('/color')
-
+            color.setTotalCount(1)
             if (toggle){
                 color.setOnToggle(false)
             }
@@ -48,6 +49,7 @@ const TypeBar:FC<TypeBarProps> = observer(
             color.setQuery('')
             setActiveTab(true)
             color.setSelectedType(0)
+            color.setTotalCount(1)
             history('/color')
             if (toggle){
                 color.setOnToggle(false)

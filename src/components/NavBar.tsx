@@ -3,7 +3,6 @@ import {Container, Form, Nav, Navbar} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
 import styles from "../styles/NavBar.module.scss"
 import logo from '../assets/logo.svg'
-import {searchColors} from "../http/colorAPI";
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
 import TypeBar from "./TypeBar"
@@ -31,6 +30,7 @@ const NavBar = observer(
                 event.preventDefault();
                 color.setQuery(querySearch.toUpperCase())
                 color.setPage(1)
+                color.setTotalCount(1)
             }
         }
 

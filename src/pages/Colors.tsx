@@ -24,19 +24,22 @@ const Colors: FC = observer(
         )
 
         useEffect(() => {
-            color.query ?
-                searchColors(color.selectedType.id, color.query, color.page, 12).then(
-                    (res) => {
-                        color.setColors(res.data.rows)
-                        color.setTotalCount(res.data.count)
-                    }
-                )
-                :
-                fetchColors(color.selectedType.id, null, color.page, 12).then(data => {
-                    color.setColors(data.rows)
-                    color.setTotalCount(data.count)
-                })
-        }, [color.page, color.selectedType, color.query])
+            if (color.totalCount !== 0){
+                color.query?
+                    searchColors(color.selectedType.id, color.query, color.page, 12).then(
+                        (res) => {
+                            color.setColors(res.data.rows)
+                            color.setTotalCount(res.data.count)
+                        }
+                    )
+                    :
+                    fetchColors(color.selectedType.id, null, color.page, 12).then(data => {
+                        color.setColors(data.rows)
+                        color.setTotalCount(data.count)
+                    })
+            }
+
+        }, [color.page, color.selectedType, color.query, color.totalCount])
         return (
             <Container className={styles.container}>
                 <Row>
