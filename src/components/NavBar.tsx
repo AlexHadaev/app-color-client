@@ -12,28 +12,25 @@ import TypeBar from "./TypeBar"
 const NavBar = observer(
     () => {
         const {color} = useContext(Context)
-        const [query, setQuery] = useState<string>('')
+        const [querySearch, setQuerySearch] = useState<string>(color.query)
+        console.log(color.query);
 
-        // useEffect(
-        //     () => {
+        useEffect(
+            () => {
         //         searchColors(color.selectedType.id, query.toUpperCase(), color.page, 8).then(
         //             (res) => {
         //                 color.setColors(res.data.rows)
         //                 color.setTotalCount(res.data.count)
         //             }
         //         )
-        //     }, [query]
-        // )
+                setQuerySearch(color.query)
+            }, [color.query]
+        )
 
         const handleKeyPress = (event:React.KeyboardEvent) => {
             if(event.key === 'Enter'){
                 event.preventDefault();
-                searchColors(color.selectedType.id, query.toUpperCase(), color.page, 8).then(
-                    (res) => {
-                        color.setColors(res.data.rows)
-                        color.setTotalCount(res.data.count)
-                    }
-                )
+                color.setQuery(querySearch.toUpperCase())
             }
         }
 
@@ -67,8 +64,9 @@ const NavBar = observer(
                                 placeholder="Search"
                                 className="me-2"
                                 aria-label="Search"
+                                value={querySearch}
                                 onKeyPress={(e)=>handleKeyPress(e)}
-                                onChange={(e) => setQuery(e.target.value)}
+                                onChange={(e) => setQuerySearch(e.target.value)}
                             />
 
                         </Form>

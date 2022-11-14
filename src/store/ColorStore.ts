@@ -7,6 +7,7 @@ export default class ColorStore {
         public _colors: Array<IColors> = [],
         public _shadows: Array<IColors> = [],
         public _selectedType: {} = {},
+        public _query: string = '',
         public _onToggle: boolean = false,
         public _page: number = 1,
         public _totalCount: number = 0,
@@ -15,6 +16,9 @@ export default class ColorStore {
         makeAutoObservable(this)
     }
 
+    setQuery(query:string){
+        this._query = query
+    }
     setOnToggle(toggle:boolean){
         this._onToggle = toggle
     }
@@ -44,6 +48,9 @@ export default class ColorStore {
         this._totalCount = count
     }
 
+    get query(){
+        return this._query
+    }
     get onToggle(){
         return this._onToggle
     }

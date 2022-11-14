@@ -22,6 +22,7 @@ const TypeBar:FC<TypeBarProps> = observer(
         },[])
 
         const randomColors = () => {
+            color.setQuery('')
             fetchColors(color.selectedType.id, 12, 1, 8).then(data => {
                 color.setColors(data.rows)
                 history('/color')
@@ -32,6 +33,7 @@ const TypeBar:FC<TypeBarProps> = observer(
         }
 
         const changeType = (type:ITypes) => {
+            color.setQuery('')
             color.setSelectedType(type)
             setActiveTab(false)
             history('/color')
@@ -42,6 +44,7 @@ const TypeBar:FC<TypeBarProps> = observer(
         }
 
         const changeAllColors = () => {
+            color.setQuery('')
             setActiveTab(true)
             color.setSelectedType(0)
             history('/color')
