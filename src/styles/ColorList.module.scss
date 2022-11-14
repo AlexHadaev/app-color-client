@@ -3,12 +3,12 @@
   padding-top: 80px;
   justify-content: space-between;
   gap: 40px 10px;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(4, 220px);
   @include max-w(1330){
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(3, 220px);
   }
   @include max-w(740){
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(2, 220px);
     column-gap: 40px;
     justify-content: center;
   }
