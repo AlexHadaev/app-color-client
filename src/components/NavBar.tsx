@@ -30,6 +30,7 @@ const NavBar = observer(
             if(event.key === 'Enter'){
                 event.preventDefault();
                 color.setQuery(querySearch.toUpperCase())
+                color.setPage(1)
             }
         }
 
