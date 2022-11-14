@@ -13,7 +13,6 @@ const NavBar = observer(
     () => {
         const {color} = useContext(Context)
         const [querySearch, setQuerySearch] = useState<string>(color.query)
-        console.log(color.query);
 
         useEffect(
             () => {
