@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Container, Form, Nav, Navbar} from "react-bootstrap";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import styles from "../styles/NavBar.module.scss"
 import logo from '../assets/logo.svg'
 import {Context} from "../index";
@@ -12,25 +12,15 @@ const NavBar = observer(
     () => {
         const {color} = useContext(Context)
         const [querySearch, setQuerySearch] = useState<string>(color.query)
-
-        useEffect(
-            () => {
-        //         searchColors(color.selectedType.id, query.toUpperCase(), color.page, 8).then(
-        //             (res) => {
-        //                 color.setColors(res.data.rows)
-        //                 color.setTotalCount(res.data.count)
-        //             }
-        //         )
-                setQuerySearch(color.query)
-            }, [color.query]
-        )
+        const history = useNavigate()
 
         const handleKeyPress = (event:React.KeyboardEvent) => {
             if(event.key === 'Enter'){
                 event.preventDefault();
-                color.setQuery(querySearch.toUpperCase())
+                color.setQuery(querySearch)
                 color.setPage(1)
                 color.setTotalCount(1)
+                history('/color')
             }
         }
 
@@ -47,7 +37,7 @@ const NavBar = observer(
                                 width="52"
                                 height="52"
                                 className="d-inline-block align-top"
-                                alt="React Bootstrap logo"
+                                alt="logo"
                             />
                         </NavLink>
                         <NavLink className={styles.navbarLink} to={"/admin"}>Add Color</NavLink>

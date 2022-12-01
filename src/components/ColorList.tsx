@@ -10,9 +10,10 @@ const ColorList = observer(
         const {color} = useContext(Context)
         return (
             <div className={`d-grid flex-wrap  ${styles.colorList}`}>
-                {color.colors.map((color:IColors) =>
-                    <ColorItem key={color.id} item={color} width={220} height={208}/>
-                )}
+                {color.message ? color.message :
+                    color.colors.map((color: IColors) =>
+                        <ColorItem key={color.id} item={color} width={220} height={208}/>
+                    )}
             </div>
         );
     }

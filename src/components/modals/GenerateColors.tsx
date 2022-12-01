@@ -8,10 +8,9 @@ interface GenerateColorProps {
 }
 const GenerateColor:FC<GenerateColorProps> = ({show, onHide}) => {
     const [value, setValue] = useState('')
-    const [check, setCheck] = useState(true)
     const generateColors = () => {
         const countColor = value || '20'
-        createColorGenerate(countColor, check).then(data => setValue(''))
+        createColorGenerate(countColor).then(data => setValue(''))
         onHide()
     }
     return (
@@ -34,8 +33,6 @@ const GenerateColor:FC<GenerateColorProps> = ({show, onHide}) => {
                         onChange={e => setValue(e.target.value)}
                         placeholder={"Enter count colors (default 20)"}
                     />
-                    <Form.Label className={"mt-3"}>Add more color shades</Form.Label>
-                    <Form.Check type={"checkbox"} checked={check} onChange={() => setCheck(!check)}/>
                 </Form>
             </Modal.Body>
             <Modal.Footer>

@@ -8,13 +8,15 @@ export const createType = async (type:{}) => {
 
 export const fetchTypes = async () => {
     const {data} = await $host.get('/type')
+    // console.log(data);
     return data
 }
 
-export const fetchColors = async (typeId?:number | null, random?:number | null, page?:number, limit?:number) => {
+export const fetchColors = async (typeId?:number | null, page?:number, limit?:number, query?: string | null) => {
     const {data} = await $host.get('/color', {params:{
-            typeId, random, page, limit
+            typeId, page, limit, query
         }})
+
     return data
 }
 
@@ -23,21 +25,19 @@ export const createColor = async (color:{}) => {
     return data
 }
 
-export const createColorGenerate = async (count: string, shadow: boolean) => {
-    const {data} = await $host.post('/color/generate', {count: count, shadow: shadow})
+export const createColorGenerate = async (count: string) => {
+    const {data} = await $host.post('/color/generate', {count: count})
     return data
 }
 
 export const fetchOneColor = async (id:any, shadows?:any) => {
     const {data} = await $host.get('/color/'+ id, {params:{shadows}})
+    // console.log(data);
     return data
 }
 
-export const searchColors = async (typeId?:number | null, query?: string | null, page?:number, limit?:number) => {
-    const data = await $host.get('/color', {
-        params:{
-            typeId, query, page, limit
-        }
-    })
+
+export const fetchColorRandom = async (typeId:number) => {
+    const {data} = await $host.get('/color/random',{params:{typeId}})
     return data
 }

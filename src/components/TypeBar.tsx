@@ -1,9 +1,9 @@
-import React, {FC, useContext, useEffect, useState} from 'react';
+import React, {FC, useContext, useEffect, useMemo, useState} from 'react';
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 import {Button, Col, ListGroup} from "react-bootstrap";
 import {ITypes} from "../types/types";
-import {fetchColors} from "../http/colorAPI";
+import {fetchColorRandom, fetchColors, fetchTypes} from "../http/colorAPI";
 import {useNavigate} from "react-router-dom";
 import styles from "../styles/TypeBar.module.scss"
 
@@ -17,17 +17,21 @@ const TypeBar:FC<TypeBarProps> = observer(
         const {color} = useContext(Context)
         const history = useNavigate()
         const [activeTab, setActiveTab] = useState<boolean>(true)
-        useEffect(()=>{
+
+        useMemo(()=>{
+        //     console.log(2);
             if (color.selectedType.id) setActiveTab(false)
-        },[])
+        //     fetchTypes().then(data => {
+        //         color.setTypes(data)
+        //         console.log(4);
+        //     })
+        },[color.selectedType.id])
 
         const randomColors = () => {
             color.setQuery('')
-            color.setTotalCount(0)
 
-            fetchColors(color.selectedType.id, 12, 1, 12).then(data => {
-                color.setColors(data.rows)
-                history('/color')
+            fetchColorRandom(color.selectedType.id).then(data => {
+                history('/color/'+data)
                 if (toggle){
                     color.setOnToggle(false)
                 }
@@ -68,6 +72,7 @@ const TypeBar:FC<TypeBarProps> = observer(
                     >
                         All colors
                     </ListGroup.Item>
+
                     {color.types.map((type:ITypes) =>
                         <ListGroup.Item
                             className={`pt-1 pb-1 ${styles.listGroupItem}` }

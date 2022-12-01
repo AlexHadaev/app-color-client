@@ -1,56 +1,69 @@
-import React, {FC, useContext, useEffect} from 'react';
-import {Col, Container, Row} from "react-bootstrap";
-import TypeBar from "../components/TypeBar";
+import React, {FC, useContext, useEffect, useState} from 'react';
+import {Col, Spinner} from "react-bootstrap";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
-import {fetchColors, fetchTypes, searchColors} from "../http/colorAPI";
+import {fetchColors} from "../http/colorAPI";
 import ColorList from "../components/ColorList";
 import Pages from "../components/Pages";
 import styles from "../styles/Colors.module.scss";
+import Layout from "../components/Layout";
 
 const Colors: FC = observer(
     () => {
         const {color} = useContext(Context)
-
-        useEffect(
-            () => {
-                fetchTypes().then(data => color.setTypes(data))
-                fetchColors(null, null, 1, 12).then(data => {
-                    color.setColors(data.rows)
-                    color.setTotalCount(data.count)
-                })
-
-            }, []
-        )
+        const [spinner, setSpinner] = useState<boolean>(true)
+        const [isResult, setIsResult] = useState<boolean>(true)
+        const querySearch = color.query || null
+        // useMemo(
+        //     () => {
+        //         // fetchTypes().then(data => color.setTypes(data))
+        //         fetchColors(null, 1, 12).then(data => {
+        //             color.setColors(data.rows)
+        //             color.setTotalCount(data.count)
+        //             setSpinner(false)
+        //         })
+        //
+        //     }, []
+        // )
 
         useEffect(() => {
-            if (color.totalCount !== 0){
-                color.query?
-                    searchColors(color.selectedType.id, color.query, color.page, 12).then(
-                        (res) => {
-                            color.setColors(res.data.rows)
-                            color.setTotalCount(res.data.count)
-                        }
-                    )
-                    :
-                    fetchColors(color.selectedType.id, null, color.page, 12).then(data => {
-                        color.setColors(data.rows)
-                        color.setTotalCount(data.count)
-                    })
-            }
+            console.log(color.message);
 
-        }, [color.page, color.selectedType, color.query, color.totalCount])
+            fetchColors(color.selectedType.id, color.page, 12, querySearch).then(data => {
+                // const checkResult = data.message?false:true
+                setIsResult(!data.message)
+                const rows = data.rows || []
+                const count = data.count || 0
+                console.log(!data.message);
+                color.setColors(rows)
+                color.setTotalCount(count)
+                setSpinner(false)
+
+            })
+            //     }
+            //
+        }, [
+            color.page,
+            color.selectedType.id,
+            querySearch,
+            // color.totalCount
+        ])
         return (
-            <Container className={styles.container}>
-                <Row>
-                    <TypeBar styleMedia={styles.showDesktop}/>
-                    <Col className={styles.colors}>
-                        <ColorList/>
-                        <Pages/>
-                    </Col>
-                </Row>
+            <Layout>
+                <Col className={styles.colors}>
+                    {spinner &&
+                    <div className={styles.spinner}>
+                        <Spinner animation="border" variant="primary"/>
+                    </div>
+                    }
+                    {isResult ?
+                        <ColorList/> :
+                        <h1 className={"mt-5 text-center"}>No result</h1>
+                    }
 
-            </Container>
+                    <Pages/>
+                </Col>
+            </Layout>
         );
     }
 );

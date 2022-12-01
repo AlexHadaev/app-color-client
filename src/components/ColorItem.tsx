@@ -1,8 +1,7 @@
-import React, {FC} from 'react';
+import React, {FC, memo} from 'react';
 import {Card} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import {IColors} from "../types/types";
-import {rgbaToHex} from "../utils/utils";
 import styles from "../styles/ColorItem.module.scss";
 
 interface ColorItemProps {
@@ -12,17 +11,20 @@ interface ColorItemProps {
     onClick?: (color: IColors) => void;
 }
 
-const ColorItem:FC<ColorItemProps> = ({item, width, height}) => {
-    //useHistory()
-    const history = useNavigate()
-    return (
-        <div className={styles.colorItem} style={{ width: width, cursor:'pointer'}} onClick={()=> history(('/color/'+item.id))}>
-            <Card  text={"dark"} >
-                <div className={styles.colorBox} style={{ height:height, background:`rgba(${item.color})`}}/>
-                <h6 className={"sd"}>{rgbaToHex(item.color)}</h6>
-            </Card>
-        </div>
-    );
-};
+const ColorItem:FC<ColorItemProps> = memo(
+    ({item, width, height}) => {
+        //useHistory()
+        const history = useNavigate()
+        // console.log('color item = ',item);
+        return (
+            <div className={styles.colorItem} style={{ width: width, cursor:'pointer'}} onClick={()=> history(('/color/'+item.id))}>
+                <Card  text={"dark"} >
+                    <div className={styles.colorBox} style={{ height:height, background:`rgba(${item.rgb})`}}/>
+                    <h6 className={"sd"}>{item.hex}</h6>
+                </Card>
+            </div>
+        );
+    }
+);
 
 export default ColorItem;

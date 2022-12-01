@@ -3,8 +3,8 @@ import {Button, Dropdown, Form, Modal} from "react-bootstrap";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {ITypes} from "../../types/types";
-import {hexToRGB, rgbaToHex, shadows} from "../../utils/utils"
-import {createColor, fetchColors, fetchTypes} from "../../http/colorAPI";
+import {hexToRGB, rgbToHex} from "../../utils/utils"
+import {createColor} from "../../http/colorAPI";
 
 interface CreateColorProps {
     show: boolean,
@@ -14,40 +14,35 @@ interface CreateColorProps {
 const CreateColor: FC<CreateColorProps> = observer(
     ({show, onHide}) => {
         const {color} = useContext(Context)
-        const [shadow, setShadow] = useState<number>()
         const [name, setName] = useState('')
         const [noValidType, setNoValidType] = useState<boolean>(false)
-        const [noValidShadow, setNoValidShadow] = useState<boolean>(false)
 
         useEffect(() => {
             if (show) {
                 setNoValidType(false)
-                setNoValidShadow(false)
             }
         }, [show])
 
-        useEffect(() => {
-            fetchTypes().then(data => color.setTypes(data))
-            fetchColors().then(data => color.setColors(data.rows))
-        }, [])
+        // useEffect(() => {
+        //     // fetchTypes().then(data => color.setTypes(data))
+        //     fetchColors().then(data => color.setColors(data.rows))
+        // }, [])
 
 
-        const addDevice = () => {
+        const addColor = () => {
             let formData = {}
             const colorCode = hexToRGB(name)
 
-            if (shadow && color.selectedType.id) {
-                const colorCodeHEX = rgbaToHex(colorCode + "," + shadow)
+            if (color.selectedType.id) {
+                const colorCodeHEX = rgbToHex(colorCode)
                 formData = {
-                    'color': colorCode + "," + shadow,
-                    'shadow': colorCode,
+                    'rgb': colorCode,
                     'typeId': color.selectedType.id,
-                    'colorHEXA': colorCodeHEX
+                    'hex': colorCodeHEX
                 }
 
                 createColor(formData).then(data => onHide())
             }
-            shadow? setNoValidShadow(false) : setNoValidShadow(true)
             color.selectedType.id? setNoValidType(false): setNoValidType(true)
         }
 
@@ -80,22 +75,7 @@ const CreateColor: FC<CreateColorProps> = observer(
                                 )}
                             </Dropdown.Menu>
                         </Dropdown>
-                        <Dropdown className={"mt-2 mb-2"}>
-                            <Dropdown.Toggle className={noValidShadow ? "btn-danger" : ''}>
-                                {shadow || 'Change shadow'}
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu>
 
-                                {shadows().map((item: number) =>
-                                    <Dropdown.Item
-                                        onClick={() => setShadow(item)}
-                                        key={item}
-                                    >
-                                        {item}
-                                    </Dropdown.Item>
-                                )}
-                            </Dropdown.Menu>
-                        </Dropdown>
                         <Form.Label>Choose color</Form.Label>
                         <Form.Control
                             value={name}
@@ -107,7 +87,7 @@ const CreateColor: FC<CreateColorProps> = observer(
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant={"outline-danger"} onClick={onHide}>Close</Button>
-                    <Button variant={"outline-success"} onClick={addDevice}>Add</Button>
+                    <Button variant={"outline-success"} onClick={addColor}>Add</Button>
                 </Modal.Footer>
             </Modal>
         );

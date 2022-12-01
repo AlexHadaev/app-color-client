@@ -4,7 +4,7 @@ export interface ITypes {
 }
 export interface IColors {
     id: number,
-    color: string,
-    shadow: string,
+    rgb: string,
+    hex: string,
     typeId: number
 }
