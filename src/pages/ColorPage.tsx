@@ -29,17 +29,17 @@ const ColorPage: FC = memo(() => {
     return (
         <Layout>
             <Col className={styles.colorPage}>
-                {spinner &&
-                <div className={styles.spinner}>
-                    <Spinner animation="border" variant="primary"/>
-                </div>
+                {spinner ?
+                    <div className={styles.spinner}>
+                        <Spinner animation="border" variant="primary"/>
+                    </div>:
+                    !isResult &&  <h1 className={"mt-5 text-center"}>No result</h1>
                 }
-                {isResult ?
+                {isResult &&
                     <Card className={styles.colorPageCard}>
                         <div className={styles.colorBox} style={{background: `rgba(${item.rgb})`}}/>
                         <h6>{item.hex}</h6>
-                    </Card> :
-                    <h1 className={"mt-5 text-center"}>No result</h1>
+                    </Card>
                 }
                 <div className={"d-flex flex-wrap p-0 " + styles.listShadow}>
                     {shadows && shadows.map((color: IColors) =>
