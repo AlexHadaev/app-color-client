@@ -6,6 +6,7 @@ import ColorItem from "../components/ColorItem"
 import {useParams} from "react-router-dom"
 import {fetchOneColor} from "../http/colorAPI"
 import Layout from "../components/Layout"
+import {sortRGB} from "../utils/utils";
 
 const ColorPage: FC = memo(() => {
     const [item, setItem] = useState<any>()
@@ -13,6 +14,7 @@ const ColorPage: FC = memo(() => {
     const [spinner, setSpinner] = useState<boolean>(true)
     const [isResult, setIsResult] = useState<boolean>(false)
     const {id} = useParams()
+
 
     useEffect(() => {
         fetchOneColor(id).then(data => {
@@ -22,7 +24,10 @@ const ColorPage: FC = memo(() => {
 
             setSpinner(false)
             setItem(dataColor)
-            setShadows(rows)
+
+            const sort = rows.sort(sortRGB);
+            setShadows(sort)
+            console.log(sort, );
         })
     }, [id])
 
