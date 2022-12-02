@@ -5,10 +5,8 @@ import Navbar from "./components/NavBar"
 import {fetchTypes} from "./http/colorAPI"
 import {Context} from "./index"
 
-
 const App = memo(() => {
     const {color} = useContext(Context)
-    // console.log('App')
 
     useMemo(()=>{
         fetchTypes().then(data => {

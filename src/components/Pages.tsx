@@ -4,7 +4,6 @@ import styles from "../styles/Pages.module.scss"
 import PaginationPage from "./PaginationPage"
 
 const Pages = memo(() => {
-        // console.log('Pages')
         return (
             <Pagination className={styles.pages}>
                 <PaginationPage/>

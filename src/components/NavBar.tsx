@@ -12,7 +12,6 @@ const NavBar: FC = observer(
     () => {
         const {color} = useContext(Context)
         const [toggle, setToggle] = useState<boolean>(false)
-        // console.log('NavBar', toggle, color.onToggle)
 
         const clickToggle = () => {
             setToggle(!toggle)

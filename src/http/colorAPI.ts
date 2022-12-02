@@ -1,6 +1,5 @@
 import {$host} from "./index"
 
-
 export const createType = async (type:{}) => {
     const {data} = await $host.post('/type', type)
     return data
@@ -8,7 +7,6 @@ export const createType = async (type:{}) => {
 
 export const fetchTypes = async () => {
     const {data} = await $host.get('/type')
-    // console.log(data)
     return data
 }
 
@@ -32,7 +30,6 @@ export const createColorGenerate = async (count: string) => {
 
 export const fetchOneColor = async (id:any, shadows?:any) => {
     const {data} = await $host.get('/color/'+ id, {params:{shadows}})
-    // console.log(data)
     return data
 }
 

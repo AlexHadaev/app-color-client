@@ -7,7 +7,6 @@ import Layout from "../components/Layout"
 
 const Colors: FC = memo(
     () => {
-        // console.log('Colors')
         return (
             <Layout>
                 <Col className={styles.colors}>

@@ -23,12 +23,6 @@ const CreateColor: FC<CreateColorProps> = observer(
             }
         }, [show])
 
-        // useEffect(() => {
-        //     // fetchTypes().then(data => color.setTypes(data))
-        //     fetchColors().then(data => color.setColors(data.rows))
-        // }, [])
-
-
         const addColor = () => {
             let formData = {}
             const colorCode = hexToRGB(name)

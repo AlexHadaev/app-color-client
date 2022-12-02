@@ -1,10 +1,10 @@
-import React, {useContext, useState} from 'react'
+import React, {FC, useContext, useState} from 'react'
 import {Pagination} from "react-bootstrap"
 import styles from "../styles/Pages.module.scss"
 import {Context} from "../index"
 import {observer} from "mobx-react-lite"
 
-const PaginationPage = observer(
+const PaginationPage: FC = observer(
     () => {
         const {color} = useContext(Context)
         const pageCount = Math.ceil(color.totalCount / color.limit)
@@ -13,7 +13,7 @@ const PaginationPage = observer(
         const [isEllipsisLeft, setIsEllipsisLeft] = useState<boolean>(true)
         const [isEllipsisRight, setIsEllipsisRight] = useState<boolean>(true)
         const pages = []
-        // console.log('PaginationPage')
+
         const currentPage = (page: number) => {
             color.setPage(page)
         }

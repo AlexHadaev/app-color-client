@@ -1,11 +1,11 @@
-import React, {FC, memo, useEffect, useState} from 'react';
-import {Card, Col, Spinner} from "react-bootstrap";
+import React, {FC, memo, useEffect, useState} from 'react'
+import {Card, Col, Spinner} from "react-bootstrap"
 import styles from "../styles/ColorPage.module.scss"
-import {IColors} from "../types/types";
-import ColorItem from "../components/ColorItem";
-import {useParams} from "react-router-dom";
-import {fetchOneColor} from "../http/colorAPI";
-import Layout from "../components/Layout";
+import {IColors} from "../types/types"
+import ColorItem from "../components/ColorItem"
+import {useParams} from "react-router-dom"
+import {fetchOneColor} from "../http/colorAPI"
+import Layout from "../components/Layout"
 
 const ColorPage: FC = memo(() => {
     const [item, setItem] = useState<any>()
@@ -13,7 +13,7 @@ const ColorPage: FC = memo(() => {
     const [spinner, setSpinner] = useState<boolean>(true)
     const [isResult, setIsResult] = useState<boolean>(false)
     const {id} = useParams()
-    // console.log('colorPage');
+
     useEffect(() => {
         fetchOneColor(id).then(data => {
             setIsResult(!data.message)

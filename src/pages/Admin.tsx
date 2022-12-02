@@ -1,13 +1,12 @@
-import React, {useState} from 'react';
-import {Button, Col, Container} from "react-bootstrap";
-import CreateType from "../components/modals/CreateType";
-import CreateColor from "../components/modals/CreateColor";
-import GenerateColors from "../components/modals/GenerateColors";
-import Layout from "../components/Layout";
-import styles from "../styles/ColorPage.module.scss";
+import React, {FC, useState} from 'react'
+import {Button, Col, Container} from "react-bootstrap"
+import CreateType from "../components/modals/CreateType"
+import CreateColor from "../components/modals/CreateColor"
+import GenerateColors from "../components/modals/GenerateColors"
+import Layout from "../components/Layout"
+import styles from "../styles/ColorPage.module.scss"
 
-const Admin = () => {
-    // console.log('admin');
+const Admin: FC = () => {
     const [generateVisible, setGenerateVisible] = useState<boolean>(false)
     const [typeVisible, setTypeVisible] = useState<boolean>(false)
     const [colorVisible, setColorVisible] = useState<boolean>(false)
@@ -44,7 +43,7 @@ const Admin = () => {
 
         </Layout>
 
-    );
-};
+    )
+}
 
 export default Admin;

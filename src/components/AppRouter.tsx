@@ -5,7 +5,6 @@ import Admin from "../pages/Admin"
 import Colors from "../pages/Colors"
 
 const AppRouter = () => {
-    // console.log('AppRouter')
     return (
         <Routes>
             <Route path={'/color'} element={<Colors/>} />

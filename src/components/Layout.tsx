@@ -7,7 +7,7 @@ type LayoutProps = {
     children?: JSX.Element | JSX.Element[]
 }
 const Layout = memo(({children}:LayoutProps) => {
-    // console.log('Layout')
+
     return (
         <Container className={styles.container}>
             <Row>

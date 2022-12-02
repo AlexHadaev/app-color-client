@@ -7,7 +7,6 @@ export const rgbToHex = (rgba:string) => {
         b.toString(16),
     ]
 
-    // Pad single-digit output values
     outParts.forEach(function (part, i) {
         if (part.length === 1) {
             outParts[i] = '0' + part

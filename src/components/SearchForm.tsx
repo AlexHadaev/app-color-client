@@ -1,14 +1,14 @@
-import React, {useContext, useState} from 'react';
+import React, {FC, useContext, useState} from 'react';
 import styles from "../styles/NavBar.module.scss";
 import {Form} from "react-bootstrap";
 import {Context} from "../index";
 import {useNavigate} from "react-router-dom";
 
-const SearchForm = () => {
+const SearchForm: FC = () => {
     const {color} = useContext(Context)
     const [querySearch, setQuerySearch] = useState<string>(color.query)
     const history = useNavigate()
-    // console.log('SearchForm');
+
     const handleKeyPress = (event:React.KeyboardEvent) => {
         if(event.key === 'Enter'){
             history('/color')
