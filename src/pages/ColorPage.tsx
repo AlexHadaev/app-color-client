@@ -11,7 +11,7 @@ const ColorPage: FC = memo(() => {
     const [item, setItem] = useState<any>()
     const [shadows, setShadows] = useState<any>()
     const [spinner, setSpinner] = useState<boolean>(true)
-    const [isResult, setIsResult] = useState<boolean>(true)
+    const [isResult, setIsResult] = useState<boolean>(false)
     const {id} = useParams()
     // console.log('colorPage');
     useEffect(() => {

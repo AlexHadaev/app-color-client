@@ -11,7 +11,7 @@ const ColorList = observer(
     () => {
         const {color} = useContext(Context)
         const [spinner, setSpinner] = useState<boolean>(true)
-        const [isResult, setIsResult] = useState<boolean>(true)
+        const [isResult, setIsResult] = useState<boolean>(false)
         const querySearch = color.query || null
 
         useEffect(() => {
