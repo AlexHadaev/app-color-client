@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useMemo} from 'react';
+import React, {memo, useContext, useMemo} from 'react';
 import {BrowserRouter} from "react-router-dom";
 import AppRouter from "./components/AppRouter";
 import Navbar from "./components/NavBar";
@@ -6,13 +6,13 @@ import {fetchTypes} from "./http/colorAPI";
 import {Context} from "./index";
 
 
-const App = () => {
+const App = memo(() => {
     const {color} = useContext(Context)
+    // console.log('App');
+
     useMemo(()=>{
-        console.log(2);
         fetchTypes().then(data => {
             color.setTypes(data)
-            console.log(5);
         })
     },[])
 
@@ -22,6 +22,6 @@ const App = () => {
             <AppRouter/>
         </BrowserRouter>
     );
-};
+});
 
 export default App;

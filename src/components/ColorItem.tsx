@@ -13,9 +13,8 @@ interface ColorItemProps {
 
 const ColorItem:FC<ColorItemProps> = memo(
     ({item, width, height}) => {
-        //useHistory()
+        // console.log('ColorItem');
         const history = useNavigate()
-        // console.log('color item = ',item);
         return (
             <div className={styles.colorItem} style={{ width: width, cursor:'pointer'}} onClick={()=> history(('/color/'+item.id))}>
                 <Card  text={"dark"} >

@@ -1,17 +1,13 @@
-import React, {useContext, useMemo} from 'react';
+import React, {memo} from 'react';
 import styles from "../styles/ColorPage.module.scss";
-import {Card, Col, Container, Row} from "react-bootstrap";
+import {Container, Row} from "react-bootstrap";
 import TypeBar from "./TypeBar";
-import {IColors} from "../types/types";
-import ColorItem from "./ColorItem";
-import {fetchTypes} from "../http/colorAPI";
-import {Context} from "../index";
 
 type LayoutProps = {
     children?: JSX.Element | JSX.Element[];
 }
-const Layout = ({children}:LayoutProps) => {
-
+const Layout = memo(({children}:LayoutProps) => {
+    // console.log('Layout');
     return (
         <Container className={styles.container}>
             <Row>
@@ -20,6 +16,6 @@ const Layout = ({children}:LayoutProps) => {
             </Row>
         </Container>
     );
-};
+});
 
 export default Layout;

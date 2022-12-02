@@ -6,17 +6,14 @@ import './Index.css';
 
 export const Context = createContext(null as any)
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+    document.getElementById('root') as HTMLElement
 );
 
 root.render(
-    <Context.Provider value = {{
-        color: new ColorStore()
-    }}>
+    <Context.Provider value={{color: new ColorStore()}}>
         <React.StrictMode>
-            <App />
+            <App/>
         </React.StrictMode>
     </Context.Provider>
-
 );
 

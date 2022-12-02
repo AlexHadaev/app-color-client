@@ -5,7 +5,6 @@ export default class ColorStore {
     constructor(
         public _types: Array<ITypes> = [],
         public _colors: Array<IColors> = [],
-        // public _shadows: Array<IColors> = [],
         public _selectedType: {} = {},
         public _query: string = '',
         public _onToggle: boolean = false,
@@ -30,10 +29,6 @@ export default class ColorStore {
     setColors(colors: []) {
         this._colors = colors
     }
-
-    // setShadows(shadows: []) {
-    //     this._shadows = shadows
-    // }
 
     setSelectedType(type: ITypes) {
         this.setPage(1)
@@ -62,10 +57,6 @@ export default class ColorStore {
     get colors() {
         return this._colors
     }
-
-    // get shadows() {
-    //     return this._shadows
-    // }
 
     get selectedType() {
         return this._selectedType

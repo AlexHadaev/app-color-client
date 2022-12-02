@@ -1,28 +1,26 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Container, Form, Nav, Navbar} from "react-bootstrap";
-import {NavLink, useNavigate} from "react-router-dom";
+import React, {FC, useContext, useEffect, useState} from 'react';
+import {Container, Navbar} from "react-bootstrap";
+import {NavLink} from "react-router-dom";
 import styles from "../styles/NavBar.module.scss"
 import logo from '../assets/logo.svg'
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
-import TypeBar from "./TypeBar"
+import NavBarBody from "./NavBarBody";
 
 
-const NavBar = observer(
+const NavBar: FC = observer(
     () => {
         const {color} = useContext(Context)
-        const [querySearch, setQuerySearch] = useState<string>(color.query)
-        const history = useNavigate()
+        const [toggle, setToggle] = useState<boolean>(false)
+        // console.log('NavBar', toggle, color.onToggle);
 
-        const handleKeyPress = (event:React.KeyboardEvent) => {
-            if(event.key === 'Enter'){
-                event.preventDefault();
-                color.setQuery(querySearch)
-                color.setPage(1)
-                color.setTotalCount(1)
-                history('/color')
-            }
+        const clickToggle = () => {
+            setToggle(!toggle)
+            color.setOnToggle(!color.onToggle)
         }
+        useEffect(()=>{
+            setToggle(color.onToggle)
+        },[color.onToggle])
 
         return (
             <Navbar
@@ -42,26 +40,10 @@ const NavBar = observer(
                         </NavLink>
                         <NavLink className={styles.navbarLink} to={"/admin"}>Add Color</NavLink>
                     </Navbar.Brand>
-                    <Navbar.Toggle onClick={()=>color.setOnToggle(!color.onToggle)} aria-controls="navbarScroll" className={styles.navbarToggle}>
+                    <Navbar.Toggle onClick={()=>clickToggle()} aria-controls="navbarScroll" className={styles.navbarToggle}>
                         |||
                     </Navbar.Toggle>
-                    <Navbar.Collapse  id="navbarScroll">
-                        <Nav className="me-auto my-2 my-lg-0" navbarScroll >
-                        </Nav>
-                        <Form className={`d-flex ${styles.formSearch}`}>
-                            <Form.Control
-                                type="search"
-                                placeholder="Search"
-                                className="me-2"
-                                aria-label="Search"
-                                value={querySearch}
-                                onKeyPress={(e)=>handleKeyPress(e)}
-                                onChange={(e) => setQuerySearch(e.target.value)}
-                            />
-
-                        </Form>
-                        <TypeBar styleMedia={styles.showMobile}  toggle={true}/>
-                    </Navbar.Collapse>
+                    <NavBarBody/>
                 </Container>
             </Navbar>
         );

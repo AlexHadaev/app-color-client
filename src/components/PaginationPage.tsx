@@ -13,7 +13,7 @@ const PaginationPage = observer(
         const [isEllipsisLeft, setIsEllipsisLeft] = useState<boolean>(true)
         const [isEllipsisRight, setIsEllipsisRight] = useState<boolean>(true)
         const pages = []
-
+        // console.log('PaginationPage');
         const currentPage = (page: number) => {
             color.setPage(page)
         }

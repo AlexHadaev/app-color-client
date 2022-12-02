@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, memo, useEffect, useState} from 'react';
 import {Card, Col} from "react-bootstrap";
 import styles from "../styles/ColorPage.module.scss"
 import {IColors} from "../types/types";
@@ -7,11 +7,11 @@ import {useParams} from "react-router-dom";
 import {fetchOneColor} from "../http/colorAPI";
 import Layout from "../components/Layout";
 
-const ColorPage = () => {
+const ColorPage: FC = memo(() => {
     const [item, setItem] = useState<any>()
     const [shadows, setShadows] = useState<any>()
     const {id} = useParams()
-    console.log('colorPage');
+    // console.log('colorPage');
     useEffect(() => {
         fetchOneColor(id).then(data => {
             setItem(data.dataColor)
@@ -40,6 +40,6 @@ const ColorPage = () => {
             </Col>
         </Layout>
     );
-};
+});
 
 export default ColorPage;

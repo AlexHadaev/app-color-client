@@ -5,13 +5,13 @@ import Admin from "../pages/Admin";
 import Colors from "../pages/Colors";
 
 const AppRouter = () => {
+    // console.log('AppRouter');
     return (
         <Routes>
-            <Route path={'/'} element={<Colors/>} />
             <Route path={'/color'} element={<Colors/>} />
             <Route path={'/color/:id'} element={<ColorPage/>} />
             <Route path={'/admin'} element={<Admin/>} />
-            <Route path="*" element={<Navigate  to={'/'} replace />} />
+            <Route path="*" element={<Navigate  to={'/color'} replace />} />
         </Routes>
     );
 };

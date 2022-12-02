@@ -1,88 +1,38 @@
-import React, {FC, useContext, useEffect, useMemo, useState} from 'react';
-import {observer} from "mobx-react-lite";
+import React, {FC, memo, useContext} from 'react';
 import {Context} from "../index";
 import {Button, Col, ListGroup} from "react-bootstrap";
-import {ITypes} from "../types/types";
-import {fetchColorRandom, fetchColors, fetchTypes} from "../http/colorAPI";
+import {fetchColorRandom} from "../http/colorAPI";
 import {useNavigate} from "react-router-dom";
 import styles from "../styles/TypeBar.module.scss"
+import TypeList from "./TypeList";
 
 interface TypeBarProps{
     styleMedia: {},
     toggle?:boolean
 }
 
-const TypeBar:FC<TypeBarProps> = observer(
-    (styleMedia, toggle) => {
+const TypeBar:FC<TypeBarProps> = memo(
+    (styleMedia) => {
         const {color} = useContext(Context)
         const history = useNavigate()
-        const [activeTab, setActiveTab] = useState<boolean>(true)
-
-        useMemo(()=>{
-        //     console.log(2);
-            if (color.selectedType.id) setActiveTab(false)
-        //     fetchTypes().then(data => {
-        //         color.setTypes(data)
-        //         console.log(4);
-        //     })
-        },[color.selectedType.id])
+        // console.log('TypeBar');
 
         const randomColors = () => {
             color.setQuery('')
 
             fetchColorRandom(color.selectedType.id).then(data => {
                 history('/color/'+data)
-                if (toggle){
-                    color.setOnToggle(false)
-                }
+                color.setOnToggle(false)
             })
         }
 
-        const changeType = (type:ITypes) => {
-            color.setQuery('')
-            color.setSelectedType(type)
-            setActiveTab(false)
-            history('/color')
-            color.setTotalCount(1)
-            if (toggle){
-                color.setOnToggle(false)
-            }
-        }
-
-        const changeAllColors = () => {
-            color.setQuery('')
-            setActiveTab(true)
-            color.setSelectedType(0)
-            color.setTotalCount(1)
-            history('/color')
-            if (toggle){
-                color.setOnToggle(false)
-            }
-        }
         return (
             <Col className={styleMedia.styleMedia + ' ' + styles.typeBar}>
                 <ListGroup>
                     <Button variant="outline-dark" className={`mb-3 ${styles.btnLight}`} onClick={randomColors}>
                         Random Color
                     </Button>
-                    <ListGroup.Item
-                        className={`pt-1 pb-1 ${styles.listGroupItem}` }
-                        active={activeTab}
-                        onClick={()=> changeAllColors()}
-                    >
-                        All colors
-                    </ListGroup.Item>
-
-                    {color.types.map((type:ITypes) =>
-                        <ListGroup.Item
-                            className={`pt-1 pb-1 ${styles.listGroupItem}` }
-                            active={type.id === color.selectedType.id}
-                            onClick={()=> changeType(type)}
-                            key={type.id}
-                        >
-                            {type.name}
-                        </ListGroup.Item>
-                    )}
+                    <TypeList/>
                 </ListGroup>
             </Col>
 
