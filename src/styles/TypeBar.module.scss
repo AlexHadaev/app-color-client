@@ -2,6 +2,7 @@
 .typeBar{
   max-width: 320px;
   width: 100%;
+  min-height: calc(100vh - 100px);
   background-color: #D6D8D8;
   padding: 0;
   display: flex;

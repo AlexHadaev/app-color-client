@@ -11,9 +11,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
     <Context.Provider value={{color: new ColorStore()}}>
-        <React.StrictMode>
-            <App/>
-        </React.StrictMode>
+        <App/>
     </Context.Provider>
 );
 

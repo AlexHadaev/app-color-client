@@ -34,7 +34,7 @@ const ColorPage: FC = memo(() => {
                     <Spinner animation="border" variant="primary"/>
                 </div>
                 }
-                {item && isResult ?
+                {isResult ?
                     <Card className={styles.colorPageCard}>
                         <div className={styles.colorBox} style={{background: `rgba(${item.rgb})`}}/>
                         <h6>{item.hex}</h6>
