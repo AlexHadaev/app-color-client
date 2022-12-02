@@ -36,7 +36,7 @@ export const hexToRGB = (h:string) => {
 const  maxLevelRGB = (el:{rgb:string}): number => {
     const arrLevelRGB: any[] = el.rgb.split(',')
     // return arrLevelRGB.reduce((a, b) => Number(a) + Number(b))
-    return Math.max.apply(null, arrLevelRGB);
+    return Math.max.apply(null, arrLevelRGB)
 }
 export const  sortRGB = ( a:any, b:any ): number => {
     const elPrev = maxLevelRGB(a)
