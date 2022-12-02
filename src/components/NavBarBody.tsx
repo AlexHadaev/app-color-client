@@ -1,7 +1,7 @@
-import React, {FC, memo} from 'react';
-import {Nav, Navbar} from "react-bootstrap";
-import styles from "../styles/NavBar.module.scss";
-import SearchForm from "./SearchForm";
+import React, {FC, memo} from 'react'
+import {Nav, Navbar} from "react-bootstrap"
+import styles from "../styles/NavBar.module.scss"
+import SearchForm from "./SearchForm"
 import TypeBar from "./TypeBar";
 
 const NavBarBody: FC = memo(() => {

@@ -30,9 +30,9 @@ const ColorPage: FC = memo(() => {
         <Layout>
             <Col className={styles.colorPage}>
                 {spinner &&
-                    <div className={styles.spinner}>
-                        <Spinner animation="border" variant="primary"/>
-                    </div>
+                <div className={styles.spinner}>
+                    <Spinner animation="border" variant="primary"/>
+                </div>
                 }
                 {item && isResult ?
                     <Card className={styles.colorPageCard}>

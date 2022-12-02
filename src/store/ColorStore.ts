@@ -1,5 +1,5 @@
-import {makeAutoObservable} from "mobx";
-import {IColors, ITypes} from "../types/types";
+import {makeAutoObservable} from "mobx"
+import {IColors, ITypes} from "../types/types"
 
 export default class ColorStore {
     constructor(
@@ -15,10 +15,11 @@ export default class ColorStore {
         makeAutoObservable(this)
     }
 
-    setQuery(query:string){
+    setQuery(query: string) {
         this._query = query
     }
-    setOnToggle(toggle:boolean){
+
+    setOnToggle(toggle: boolean) {
         this._onToggle = toggle
     }
 
@@ -43,10 +44,11 @@ export default class ColorStore {
         this._totalCount = count
     }
 
-    get query(){
+    get query() {
         return this._query
     }
-    get onToggle(){
+
+    get onToggle() {
         return this._onToggle
     }
 

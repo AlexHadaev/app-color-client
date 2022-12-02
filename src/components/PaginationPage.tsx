@@ -1,19 +1,19 @@
-import React, {useContext, useState} from 'react';
-import {Pagination} from "react-bootstrap";
-import styles from "../styles/Pages.module.scss";
-import {Context} from "../index";
-import {observer} from "mobx-react-lite";
+import React, {useContext, useState} from 'react'
+import {Pagination} from "react-bootstrap"
+import styles from "../styles/Pages.module.scss"
+import {Context} from "../index"
+import {observer} from "mobx-react-lite"
 
 const PaginationPage = observer(
     () => {
         const {color} = useContext(Context)
         const pageCount = Math.ceil(color.totalCount / color.limit)
-        const middleNumberPage = Math.ceil(pageCount/2) | 10;
+        const middleNumberPage = Math.ceil(pageCount/2) | 10
         const [centerNumberPage, setCenterNumberPage] = useState<number>(middleNumberPage)
         const [isEllipsisLeft, setIsEllipsisLeft] = useState<boolean>(true)
         const [isEllipsisRight, setIsEllipsisRight] = useState<boolean>(true)
         const pages = []
-        // console.log('PaginationPage');
+        // console.log('PaginationPage')
         const currentPage = (page: number) => {
             color.setPage(page)
         }
@@ -138,8 +138,8 @@ const PaginationPage = observer(
                     </>
                 }
             </>
-        );
+        )
     }
-);
+)
 
-export default PaginationPage;
+export default PaginationPage

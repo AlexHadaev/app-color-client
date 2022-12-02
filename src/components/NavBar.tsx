@@ -1,18 +1,18 @@
-import React, {FC, useContext, useEffect, useState} from 'react';
-import {Container, Navbar} from "react-bootstrap";
-import {NavLink} from "react-router-dom";
+import React, {FC, useContext, useEffect, useState} from 'react'
+import {Container, Navbar} from "react-bootstrap"
+import {NavLink} from "react-router-dom"
 import styles from "../styles/NavBar.module.scss"
 import logo from '../assets/logo.svg'
-import {Context} from "../index";
-import {observer} from "mobx-react-lite";
-import NavBarBody from "./NavBarBody";
+import {Context} from "../index"
+import {observer} from "mobx-react-lite"
+import NavBarBody from "./NavBarBody"
 
 
 const NavBar: FC = observer(
     () => {
         const {color} = useContext(Context)
         const [toggle, setToggle] = useState<boolean>(false)
-        // console.log('NavBar', toggle, color.onToggle);
+        // console.log('NavBar', toggle, color.onToggle)
 
         const clickToggle = () => {
             setToggle(!toggle)
@@ -46,8 +46,8 @@ const NavBar: FC = observer(
                     <NavBarBody/>
                 </Container>
             </Navbar>
-        );
+        )
     }
-);
+)
 
-export default NavBar;
+export default NavBar

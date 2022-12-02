@@ -1,6 +1,6 @@
-import React, {FC, memo, useContext} from 'react';
-import {Context} from "../index";
-import {Button, Col, ListGroup} from "react-bootstrap";
+import React, {FC, memo, useContext} from 'react'
+import {Context} from "../index"
+import {Button, Col, ListGroup} from "react-bootstrap"
 import {fetchColorRandom} from "../http/colorAPI";
 import {useNavigate} from "react-router-dom";
 import styles from "../styles/TypeBar.module.scss"

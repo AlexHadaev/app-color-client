@@ -1,6 +1,6 @@
-import React, {FC, useState} from 'react';
-import {Button, Form, Modal} from "react-bootstrap";
-import {createColorGenerate} from "../../http/colorAPI";
+import React, {FC, useState} from 'react'
+import {Button, Form, Modal} from "react-bootstrap"
+import {createColorGenerate} from "../../http/colorAPI"
 
 interface GenerateColorProps {
     show:boolean,
@@ -40,7 +40,7 @@ const GenerateColor:FC<GenerateColorProps> = ({show, onHide}) => {
                 <Button variant={"outline-success"} onClick={generateColors}>Add</Button>
             </Modal.Footer>
         </Modal>
-    );
-};
+    )
+}
 
-export default GenerateColor;
+export default GenerateColor
