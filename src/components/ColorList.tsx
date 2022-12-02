@@ -28,7 +28,7 @@ const ColorList = observer(
         }, [ color.page, color.selectedType.id,   querySearch, ])
         // console.log('ColorList');
         return (
-            <div className={`d-grid flex-wrap  ${styles.colorList}`}>
+            <div className={`${isResult && 'd-grid'} flex-wrap  ${styles.colorList}`}>
                 {spinner &&
                 <div className={styles.spinner}>
                     <Spinner animation="border" variant="primary"/>
